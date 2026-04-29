@@ -28,8 +28,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,6 +39,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -56,64 +60,27 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-data class ShoppingListItem(
-    val description: String,
-    val bought: Boolean = false
-)
 
 @Composable
 fun App() {
-    val shoppingList = remember {
-        mutableStateListOf(ShoppingListItem("Молоко"), ShoppingListItem("Мука"))
-    }
-    var newItemDesc by remember { mutableStateOf("") }
-    LazyColumn {
-        item {
-            OutlinedTextField(
-                value = newItemDesc, onValueChange = { newItemDesc = it },
-                modifier = Modifier.padding(8.dp),
-                label = {
-                    Text("Название продукта")
-                },
-                trailingIcon = {
-                    IconButton(onClick = {
-                        if (newItemDesc.isNotBlank()) {
-                            shoppingList.add(ShoppingListItem(newItemDesc.trim()))
-                            newItemDesc = ""
-                        }
-                    }) {
-                        Icon(Icons.Default.Add, contentDescription = "Добавить")
-                    }
-                })
+    Column {
+        var count by remember { mutableIntStateOf(1) }
+
+        Button(onClick = {
+            count += 1
+        }) {
+            Text(stringResource(R.string.increment))
         }
-        itemsIndexed(shoppingList) { i, item ->
-            ShoppingListElement(
-                item,
-                onBoughtChange = {
-                    shoppingList[i] = item.copy(bought = it)
-                },
-                onDelete = {
-                    shoppingList.removeAt(i)
-                }
-            )
+        Button(onClick = {
+            count -= 1
+        }) {
+            Text(stringResource(R.string.decrement))
         }
+
+        Text(pluralStringResource(R.plurals.things, count, count))
     }
 }
 
-@Composable
-fun ShoppingListElement(item: ShoppingListItem, onBoughtChange: (Boolean) -> Unit, onDelete: () -> Unit) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Checkbox(
-            checked = item.bought,
-            onCheckedChange = onBoughtChange
-        )
-        Text(item.description, Modifier.weight(1f))
-        IconButton(onClick = onDelete) {
-            // contentDescription не отображается на экране, но читается средствами помощи слепым
-            Icon(Icons.Default.Delete, contentDescription = "Удалить")
-        }
-    }
-}
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {

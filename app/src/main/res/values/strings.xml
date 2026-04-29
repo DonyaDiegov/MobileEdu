@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MobileEdu</string>
+    <plurals name="things">
+        <item quantity="one">%1$d штука</item>
+        <item quantity="few">%1$d штуки</item>
+        <item quantity="other">%1$d штук</item>
+    </plurals>
+    <string name="increment">Увеличить</string>
+    <string name="decrement">Уменьшить</string>
 </resources>
