@@ -25,6 +25,7 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -45,17 +46,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mobileedu.ui.theme.MobileEduTheme
+import com.example.mobileedu.ui.theme.getApplicationColorScheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MobileEduTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
-                }
-            }
+            App()
         }
     }
 }
@@ -63,21 +61,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun App() {
-    Column {
-        var count by remember { mutableIntStateOf(1) }
-
-        Button(onClick = {
-            count += 1
-        }) {
-            Text(stringResource(R.string.increment))
+    MobileEduTheme {
+        Scaffold { contentPadding ->
+            var state by remember { mutableStateOf(false) }
+            Column(Modifier.padding(contentPadding)) {
+                Button(onClick = { state = !state }) {
+                    Text("Переключить")
+                }
+                Text("Состояние: $state")
+            }
         }
-        Button(onClick = {
-            count -= 1
-        }) {
-            Text(stringResource(R.string.decrement))
-        }
-
-        Text(pluralStringResource(R.plurals.things, count, count))
     }
 }
 
