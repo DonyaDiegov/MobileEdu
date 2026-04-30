@@ -46,7 +46,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mobileedu.ui.theme.MobileEduTheme
-import com.example.mobileedu.ui.theme.getApplicationColorScheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
