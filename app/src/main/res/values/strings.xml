@@ -9,4 +9,11 @@
     <string name="decrement">Уменьшить</string>
     <string name="dropdownmenu_launch">Запуск</string>
     <string name="dropdownmenu_settings">Настройки</string>
+    <string name="home_screen_topbar_title">Домашний экран</string>
+    <string name="second_screen_topbar_title">Второй экран</string>
+    <string name="about_screen_topbar_title">О программе</string>
+
+    <string name="home_screen_go_to_second_screen_text_field_label">Параметр второго экрана</string>
+    <string name="home_screen_go_to_second_screen_button">Перейти на второй экран</string>
+    <string name="about_screen_text">Создано в рамках изучения мобильной разработки</string>
 </resources>
