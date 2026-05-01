@@ -7,4 +7,6 @@
     </plurals>
     <string name="increment">Увеличить</string>
     <string name="decrement">Уменьшить</string>
+    <string name="dropdownmenu_launch">Запуск</string>
+    <string name="dropdownmenu_settings">Настройки</string>
 </resources>
